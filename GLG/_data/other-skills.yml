@@ -1,0 +1,7 @@
+- name: Laravel
+  percentage: 50
+  color: info
+
+- name: Jekyll
+  percentage: 50
+  color: success
